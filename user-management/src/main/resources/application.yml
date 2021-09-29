@@ -9,3 +9,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+application:
+  admin:
+    user:
+      username: admin
+      password: admin
+      authorities: ROLE_ADMIN
+  appuser:
+    user:
+      authorities: ROLE_APPUSER
