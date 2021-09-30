@@ -1,7 +1,6 @@
-package users;
+package user.management;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class User {
@@ -11,15 +10,15 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    private String authorities;
+    private String authority;
 
     public User() {
     }
 
-    public User(String username, String password, String authorities) {
+    public User(String username, String password, String authority) {
         this.username = username;
         this.password = password;
-        this.authorities = authorities;
+        this.authority = authority;
     }
 
     public Long getId() {
@@ -46,11 +45,11 @@ public class User {
         this.password = password;
     }
 
-    public String getAuthorities() {
-        return authorities;
+    public String getAuthority() {
+        return authority;
     }
 
-    public void setAuthorities(String authorities) {
-        this.authorities = authorities;
+    public void setAuthority(String authorities) {
+        this.authority = authorities;
     }
 }

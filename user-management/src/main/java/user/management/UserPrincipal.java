@@ -1,4 +1,4 @@
-package users;
+package user.management;
 
 
 import org.springframework.security.core.GrantedAuthority;
@@ -17,7 +17,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String authorities = user.getAuthorities();
+        String authorities = user.getAuthority();
         return AuthorityUtils.createAuthorityList(authorities);
     }
 

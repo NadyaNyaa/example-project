@@ -15,7 +15,7 @@ application:
     user:
       username: admin
       password: admin
-      authorities: ROLE_ADMIN
+      authority: ROLE_ADMIN
   appuser:
     user:
-      authorities: ROLE_APPUSER
+      authority: ROLE_APPUSER

@@ -1,4 +1,4 @@
-package users;
+package user.management;
 
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.properties.ConfigurationProperties;
