@@ -1,0 +1,115 @@
+###
+POST http://localhost:9200/user/create
+Content-Type: application/json
+Authorization: Basic admin admin
+
+{
+  "username": "testUser",
+  "password": "Coding12#",
+  "authority": "ROLE_APPUSER"
+}
+
+###
+POST http://localhost:9200/user/create
+Content-Type: application/json
+Authorization: Basic admin admin
+
+{
+  "username": "testUser2",
+  "password": "Coding12#",
+  "authority": "ROLE_APPUSER"
+}
+
+###
+POST http://localhost:9200/user/create
+Content-Type: application/json
+Authorization: Basic admin admin
+
+{
+  "username": "testUser3",
+  "password": "Coding12#",
+  "authority": "ROLE_APPUSER"
+}
+
+### test editing a user
+PUT http://localhost:9200/user/edit/2
+Content-Type: application/json
+Authorization: Basic admin admin
+
+{
+  "username": "testUser_newName",
+  "password": "Coding12#",
+  "authority": "ROLE_VOLUNTEER"
+}
+
+### See if user has been edited
+GET http://localhost:9200/user/2
+Authorization: Basic admin admin
+
+### View all users
+GET http://localhost:9200/user/view
+Authorization: Basic admin admin
+
+### Create events for testing
+POST http://localhost:9200/event/create
+Content-Type: application/json
+Authorization: Basic testUser2 Coding12#
+
+{
+  "title": "testEvent",
+  "startTime": "2020-01-20T00:06:00",
+  "endTime": "2020-01-20T00:11:00"
+}
+
+### Create events for testing - Fails because of time constraint
+POST http://localhost:9200/event/create
+Content-Type: application/json
+Authorization: Basic testUser2 Coding12#
+
+{
+  "title": "testEvent2",
+  "startTime": "2020-01-20T00:10:00",
+  "endTime": "2020-01-20T00:12:00"
+}
+
+### Create events for testing
+POST http://localhost:9200/event/create
+Content-Type: application/json
+Authorization: Basic testUser3 Coding12#
+
+{
+  "title": "testEvent3",
+  "startTime": "2020-01-20T00:08:00",
+  "endTime": "2020-01-20T00:09:00"
+}
+
+### View all events
+GET http://localhost:9200/event/view
+Authorization: Basic testUser3 Coding12#
+
+### Edit an event
+PUT http://localhost:9200/event/edit/8
+Content-Type: application/json
+Authorization: Basic testUser2 Coding12#
+
+{
+  "title": "testEvent_newName",
+  "startTime": "2020-01-20T00:10:00",
+  "endTime": "2020-01-20T00:11:00"
+}
+
+### View all events
+GET http://localhost:9200/event/view
+Authorization: Basic testUser3 Coding12#
+
+### Delete a user and their events
+DELETE http://localhost:9200/user/delete/4
+Authorization: Basic admin admin
+
+### View all users to confirm deletion
+GET http://localhost:9200/user/view
+Authorization: Basic admin admin
+
+### View all events to confirm deletion
+GET http://localhost:9200/event/view
+Authorization: Basic testUser2 Coding12#

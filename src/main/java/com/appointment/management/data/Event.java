@@ -3,7 +3,6 @@ package com.appointment.management.data;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,8 +14,8 @@ public class Event {
     @NotEmpty
     @Column(unique=true)
     private String title;
-    private String creator;
 
+    private String creator;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 

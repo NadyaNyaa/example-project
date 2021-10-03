@@ -10,9 +10,6 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
-    // TODO: delete all mentions in EVENTS
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final String userRole;
