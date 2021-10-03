@@ -1,0 +1,25 @@
+###
+POST http://localhost:9200/event/create
+Content-Type: application/json
+Authorization: Basic testUser Coding12#
+
+{
+  "title": "testEvent",
+  "startTime": "2020-01-20T00:00:00",
+  "endTime": "2050-01-21T00:00:00"
+}
+
+###
+POST http://localhost:9200/event/create
+Content-Type: application/json
+Authorization: Basic testUser Coding12#
+
+{
+  "title": "testEvent9",
+  "startTime": "2020-01-20T00:00:00",
+  "endTime": "2050-01-21T00:00:00"
+}
+
+###
+GET http://localhost:9200/event/view
+Authorization: Basic testUser Coding12#
