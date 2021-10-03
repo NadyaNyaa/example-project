@@ -1,7 +1,7 @@
 ###
 POST http://localhost:9200/event/create
 Content-Type: application/json
-Authorization: Basic testUser Coding12#
+Authorization: Basic testUser2 Coding12#
 
 {
   "title": "testEvent",
@@ -22,4 +22,4 @@ Authorization: Basic testUser Coding12#
 
 ###
 GET http://localhost:9200/event/view
-Authorization: Basic testUser Coding12#
+Authorization: Basic testUser2 Coding12#

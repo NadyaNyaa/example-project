@@ -20,7 +20,7 @@ public class User {
     private String password;
     private String authority;
 
-    @ManyToMany
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Event> events = new ArrayList<>();
 
     public User() {

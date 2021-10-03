@@ -15,13 +15,10 @@ public class Event {
     @NotEmpty
     @Column(unique=true)
     private String title;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-
     private String creator;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<User> participants;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     public Event(){
     }
@@ -64,12 +61,17 @@ public class Event {
         this.endTime = endTime;
     }
 
-    public List<User> getParticipants() {
-        return participants;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return Objects.equals(id, event.id) && Objects.equals(title, event.title) && Objects.equals(startTime, event.startTime) && Objects.equals(endTime, event.endTime);
     }
 
-    public void setParticipants(List<User> participants) {
-        this.participants = participants;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, startTime, endTime);
     }
 
     public String getCreator() {
@@ -78,18 +80,5 @@ public class Event {
 
     public void setCreator(String creator) {
         this.creator = creator;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
-        return Objects.equals(id, event.id) && Objects.equals(title, event.title) && Objects.equals(startTime, event.startTime) && Objects.equals(endTime, event.endTime) && Objects.equals(creator, event.creator) && Objects.equals(participants, event.participants);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, startTime, endTime, creator, participants);
     }
 }

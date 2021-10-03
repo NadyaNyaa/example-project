@@ -17,18 +17,19 @@ public class EventService {
         this.userRepository = userRepository;
     }
 
-    public Optional<Event> saveEvent(Event event, String creatorName) {
-        var oCreator = userRepository.findOneByUsername(creatorName);
+    public Optional<Event> saveEvent(Event event, String username) {
+        var oCreator = userRepository.findOneByUsername(username);
         if (oCreator.isEmpty()) return Optional.empty();
         var creator = oCreator.get();
         for (Event eventCheck: creator.getEvents()) {
             if (isOverlapping(event, eventCheck)) {
-                throw new IllegalArgumentException("New event is overlapping with event " + eventCheck.getTitle());
+                throw new IllegalArgumentException("Event is overlapping with event " + eventCheck.getTitle());
             }
         }
-        event.setCreator(creatorName);
-        event.setParticipants(List.of(creator));
+        event.setCreator(username);
+        creator.getEvents().add(event);
         eventRepository.save(event);
+        userRepository.save(creator);
         return Optional.of(event);
     }
 
@@ -36,14 +37,17 @@ public class EventService {
         var oEvent = eventRepository.findById(Long.parseLong(id));
         if (oEvent.isEmpty()) throw new IllegalArgumentException("Event does not exist");
         var event = oEvent.get();
-        if (!event.getCreator().equals(username)) throw new IllegalArgumentException("You can only edit events you created");
-        for (User participant: event.getParticipants()) {
-            for (Event eventCheck: participant.getEvents()) {
-                if (isOverlapping(event, eventCheck)) throw new IllegalArgumentException("Event is overlapping with event " + eventCheck.getTitle());
-                }
+
+        var oCreator = userRepository.findOneByUsername(username);
+        if (oCreator.isEmpty()) return Optional.empty();
+        var creator = oCreator.get();
+        for (Event eventCheck: creator.getEvents()) {
+            if (isOverlapping(event, eventCheck)) {
+                throw new IllegalArgumentException("Event is overlapping with event " + eventCheck.getTitle());
             }
+        }
+
         event.setTitle(eventEdits.getTitle());
-        event.setCreator(eventEdits.getCreator());
         event.setStartTime(eventEdits.getStartTime());
         event.setEndTime(eventEdits.getEndTime());
         eventRepository.save(event);
